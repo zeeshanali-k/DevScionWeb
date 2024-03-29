@@ -73,7 +73,7 @@ fun HomeScreen(
                     )
                 )
                 drawCircle(
-                    color = AppColors.NEON3,
+                    color = AppColors.NEON2,
                     radius = 250.0f,
                     center = Offset(
                         this.size.width,
