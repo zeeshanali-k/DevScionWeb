@@ -1,10 +1,13 @@
-package project_details.presentation.components
-
+package core.utils
 
 actual fun getOnLinkClickHandler(): OnLinkClicked {
     return object : OnLinkClicked {
         override fun onClicked(url: String) {
             openUrl(url)
+        }
+
+        override fun onMailClicked(email: String) {
+            openMail(email)
         }
     }
 }
@@ -12,6 +15,13 @@ actual fun getOnLinkClickHandler(): OnLinkClicked {
 fun openUrl(url: String): Unit = js(
     """{
         window.open(url, '_blank')
+        }
+        """
+)
+
+fun openMail(email: String): Unit = js(
+    """{
+        window.location.href = "mailto:email";
         }
         """
 )

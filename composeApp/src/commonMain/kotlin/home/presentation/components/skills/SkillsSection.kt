@@ -5,37 +5,65 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import core.theme.StandardBoldText
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import com.devscion.typistcmp.Typist
+import com.devscion.typistcmp.TypistSpeed
+import core.theme.fontSize
+import core.theme.interFamily
 import core.theme.spacing
 import core.utils.AppConstants
 import core.utils.Vertical
 
 
 @Composable
-fun SkillsSection() {
+fun SkillsSection(modifier: Modifier = Modifier) {
 
-    Column(Modifier.fillMaxWidth()) {
-        StandardBoldText(
+    Column(modifier) {
+        Typist(
             text = "Languages",
+            textStyle = TextStyle(
+                fontFamily = interFamily,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colors.onSecondary,
+                fontSize = MaterialTheme.fontSize.standard
+            ),
+            typistSpeed = TypistSpeed.FAST
         )
 
-        MaterialTheme.spacing.small.Vertical()
+        MaterialTheme.spacing.large.Vertical()
         SkillsRow(skills = AppConstants.LANGUAGES)
 
-        MaterialTheme.spacing.standard.Vertical()
+        MaterialTheme.spacing.large.Vertical()
 
-        StandardBoldText(
+        Typist(
             text = "Technologies",
+            textStyle = TextStyle(
+                fontFamily = interFamily,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colors.onSecondary,
+                fontSize = MaterialTheme.fontSize.standard
+            ),
+            typistSpeed = TypistSpeed.FAST
         )
-
-        MaterialTheme.spacing.small.Vertical()
+        MaterialTheme.spacing.large.Vertical()
         SkillsRow(skills = AppConstants.TECH)
-        MaterialTheme.spacing.standard.Vertical()
+        MaterialTheme.spacing.large.Vertical()
 
-        StandardBoldText(
+
+        Typist(
             text = "Architecture",
+            textStyle = TextStyle(
+                fontFamily = interFamily,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colors.onSecondary,
+                fontSize = MaterialTheme.fontSize.standard
+            ),
+            typistSpeed = TypistSpeed.FAST
         )
-        MaterialTheme.spacing.small.Vertical()
+        MaterialTheme.spacing.large.Vertical()
         SkillsRow(skills = AppConstants.OTHER)
+        MaterialTheme.spacing.large.Vertical()
+
     }
 }

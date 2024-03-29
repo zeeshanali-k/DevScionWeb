@@ -20,16 +20,12 @@ import core.theme.MediumText
 import core.theme.StandardText
 import core.theme.spacing
 import core.utils.Horizontal
+import core.utils.getOnLinkClickHandler
 import devscionweb.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
-interface OnLinkClicked {
-    fun onClicked(url: String)
-}
-
-expect fun getOnLinkClickHandler(): OnLinkClicked
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable

@@ -8,6 +8,8 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 object AppConstants {
 
+    const val PORTFOLIO_APP = "https://play.google.com/store/apps/details?id=com.techsensei.zportfolio&hl=en&gl=US"
+
     @OptIn(ExperimentalResourceApi::class)
     val SocialData = listOf(
         Social(SocialMedia.LINKEDIN,
@@ -28,7 +30,7 @@ object AppConstants {
         ),
         Social(SocialMedia.STACK_OVERFLOW,
             "Stackoverflow",
-            Res.drawable.medium_icon,
+            Res.drawable.stack_overflow,
             "https://stackoverflow.com/users/12803398/zeeshan-ali"
         ),
         Social(SocialMedia.YOUTUBE,

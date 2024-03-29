@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.painterResource
 fun ProjectItem(project: Project, onItemClicked: () -> Unit) {
     Column(
         Modifier
-            .width(180.dp)
+            .width(160.dp)
             .clickable {
                 onItemClicked()
             }

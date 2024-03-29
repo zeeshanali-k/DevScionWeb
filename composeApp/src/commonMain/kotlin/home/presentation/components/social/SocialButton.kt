@@ -5,8 +5,10 @@ import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
@@ -16,12 +18,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import core.components.NeonShadowBox
+import core.theme.AppColors
 import core.theme.StandardBoldText
+import core.theme.spacing
+import core.utils.Horizontal
 import home.domain.model.Social
 import home.domain.model.SocialMedia
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -32,7 +39,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun SocialButton(
     social: Social,
-    maxWidth: Dp = 110.dp,
+    maxWidth: Dp = 300.dp,
     onClick: (id: SocialMedia) -> Unit,
 ) {
     val isAnimating = remember {
@@ -57,21 +64,24 @@ fun SocialButton(
     }
 
 //    Box(Modifier.padding(1.dp)) {
-    Button(
-        onClick = { onClick(social.id) },
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.secondary
-        ), modifier = Modifier.width(
+    NeonShadowBox(
+        color = AppColors.NEON2,
+        modifier = Modifier.width(
             btnWidth.value
-        )
+        ).clickable {
+            onClick(social.id)
+        }
     ) {
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(vertical = MaterialTheme.spacing.standard)
+        ) {
             Image(
                 painter = painterResource(social.icon),
                 contentDescription = "linkedin",
                 Modifier.size(20.dp)
             )
-            Spacer(modifier = Modifier.width(5.dp))
+            MaterialTheme.spacing.mSmall.Horizontal()
             AnimatedVisibility(visible = isAnimated.value) {
                 StandardBoldText(
                     text = social.title,

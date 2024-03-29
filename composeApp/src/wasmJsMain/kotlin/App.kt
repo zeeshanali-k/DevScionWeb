@@ -3,14 +3,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import core.theme.DevScionWebTheme
+import core.theme.WindowSize
 import core.utils.Screen
 import home.presentation.HomeScreen
 import project_details.presentation.ProjectDetailsScreen
 
 @Composable
-fun App() {
+fun App(windowSize: WindowSize) {
 
-    DevScionWebTheme {
+    DevScionWebTheme(windowSize) {
         val currentScreen = remember {
             mutableStateOf<Screen>(Screen.Home)
         }

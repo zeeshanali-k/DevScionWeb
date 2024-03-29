@@ -4,15 +4,19 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.compositionLocalOf
 
 @Composable
 fun DevScionWebTheme(
+    windowSize: WindowSize,
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
         LocalSpacing provides Spacing(),
         LocalDpSize provides DpSize(),
-        LocalFontSize provides FontSize(),
+        LocalFontSize provides getWindowBasedFont(windowSize),
+        LocalWindowSize provides windowSize
     ) {
         MaterialTheme(
             content = content,
@@ -28,3 +32,13 @@ fun DevScionWebTheme(
         )
     }
 }
+
+
+val LocalWindowSize = compositionLocalOf {
+    WindowSize.COMPACT
+}
+
+val MaterialTheme.window: WindowSize
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalWindowSize.current

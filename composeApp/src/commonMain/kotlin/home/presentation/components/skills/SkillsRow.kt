@@ -12,20 +12,25 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import core.components.NeonShadowBox
 import core.theme.AppColors
 import core.theme.MediumBoldWhiteText
 import core.theme.spacing
+import core.utils.Horizontal
 
 
 @Composable
 fun SkillsRow(skills: List<String>) {
     LazyRow {
+        item {
+            MaterialTheme.spacing.standard.Horizontal()
+        }
         items(skills) {
             SkillItem(skill = it)
-            Spacer(modifier = Modifier.width(5.dp))
+            MaterialTheme.spacing.standard.Horizontal()
         }
     }
 }
@@ -37,6 +42,7 @@ fun SkillItem(skill: String) {
     ) {
         Box(
             Modifier
+                .clip(RoundedCornerShape(15.dp))
                 .padding(
                     MaterialTheme.spacing.medium
                 )

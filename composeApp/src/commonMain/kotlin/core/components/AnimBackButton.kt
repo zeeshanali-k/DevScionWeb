@@ -3,16 +3,13 @@ package core.components
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -31,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import com.devscion.typistcmp.Typist
 import com.devscion.typistcmp.TypistSpeed
 import core.theme.AppColors
-import core.theme.StandardText
 import core.theme.fontSize
 import core.theme.interFamily
 import core.theme.spacing
@@ -62,10 +58,10 @@ fun AnimBackButton(onBackClicked: () -> Unit) {
         Row(
             Modifier
                 .clip(RoundedCornerShape(25.dp))
-                .padding(MaterialTheme.spacing.small)
                 .clickable {
                     onBackClicked()
-                },
+                }
+                .padding(MaterialTheme.spacing.small),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {

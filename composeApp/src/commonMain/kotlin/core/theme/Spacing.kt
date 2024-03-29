@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 //For Web
 data class Spacing(
     val xSmall: Dp = 7.dp,
+    val mSmall: Dp = 10.dp,
     val small: Dp = 15.dp,
     val medium: Dp = 20.dp,
     val standard: Dp = 25.dp,
