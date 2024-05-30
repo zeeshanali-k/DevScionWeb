@@ -40,7 +40,6 @@ import org.jetbrains.compose.resources.painterResource
 import project_details.presentation.components.ProjectActionButton
 import project_details.presentation.components.ProjectTechSection
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
 
