@@ -48,6 +48,9 @@ import core.theme.window
 import core.utils.Horizontal
 import core.utils.Vertical
 import devscionweb.composeapp.generated.resources.Res
+import devscionweb.composeapp.generated.resources.android_png_icon
+import devscionweb.composeapp.generated.resources.flutter
+import devscionweb.composeapp.generated.resources.my_img
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource

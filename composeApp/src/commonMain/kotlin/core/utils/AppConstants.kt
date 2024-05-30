@@ -1,6 +1,16 @@
 package core.utils
 
 import devscionweb.composeapp.generated.resources.Res
+import devscionweb.composeapp.generated.resources.classy_logo
+import devscionweb.composeapp.generated.resources.coinpay_logo
+import devscionweb.composeapp.generated.resources.github
+import devscionweb.composeapp.generated.resources.gmail
+import devscionweb.composeapp.generated.resources.linkedin
+import devscionweb.composeapp.generated.resources.medium_icon
+import devscionweb.composeapp.generated.resources.stack_overflow
+import devscionweb.composeapp.generated.resources.vc_panel_logo
+import devscionweb.composeapp.generated.resources.youtube_icon
+import devscionweb.composeapp.generated.resources.zysky_logo
 import home.domain.model.Project
 import home.domain.model.Social
 import home.domain.model.SocialMedia

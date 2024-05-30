@@ -1,4 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
 
 package home.presentation
 
@@ -40,12 +39,12 @@ import core.utils.Horizontal
 import core.utils.Vertical
 import core.utils.getOnLinkClickHandler
 import devscionweb.composeapp.generated.resources.Res
+import devscionweb.composeapp.generated.resources.playstore_icon
 import home.domain.model.Project
 import home.presentation.components.TitlesSection
 import home.presentation.components.projects.ProjectsSection
 import home.presentation.components.skills.SkillsSection
 import home.presentation.components.social.SocialSection
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 

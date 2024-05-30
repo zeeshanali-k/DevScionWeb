@@ -32,6 +32,8 @@ import core.theme.spacing
 import core.utils.Horizontal
 import core.utils.Vertical
 import devscionweb.composeapp.generated.resources.Res
+import devscionweb.composeapp.generated.resources.android_png_icon
+import devscionweb.composeapp.generated.resources.apple_logo_black
 import home.domain.model.Project
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
