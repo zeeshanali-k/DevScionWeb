@@ -1,9 +1,8 @@
 package core.utils
 
-import home.domain.model.Project
+sealed class Screen(val route: String) {
 
+    data object Home : Screen("home")
+    data object Project : Screen("project")
 
-sealed interface Screen {
-     data object Home : Screen
-    data class ProjectDetails(val project: Project) : Screen
 }

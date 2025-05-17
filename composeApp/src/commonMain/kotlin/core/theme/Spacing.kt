@@ -1,6 +1,6 @@
 package core.theme
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
@@ -18,6 +18,7 @@ data class Spacing(
     val xLarge: Dp = 50.dp,
     val xxLarge: Dp = 60.dp,
     val xxxLarge: Dp = 70.dp,
+    val largeMax1: Dp = 100.dp,
 )
 
 val LocalSpacing = compositionLocalOf { Spacing() }

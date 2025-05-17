@@ -14,8 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -35,7 +35,6 @@ import devscionweb.composeapp.generated.resources.Res
 import devscionweb.composeapp.generated.resources.android_png_icon
 import devscionweb.composeapp.generated.resources.apple_logo_black
 import home.domain.model.Project
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import project_details.presentation.components.ProjectActionButton
 import project_details.presentation.components.ProjectTechSection
@@ -62,7 +61,7 @@ fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
     Column(
         Modifier.fillMaxSize()
             .verticalScroll(scrollState)
-            .background(MaterialTheme.colors.background)
+            .background(MaterialTheme.colorScheme.background)
             .padding(
                 vertical = 20.dp,
                 horizontal = 40.dp
@@ -74,7 +73,7 @@ fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
 
         Image(
             painter = painterResource(
-                project.logo
+                project.logo.toDrawableResource()
             ),
             "",
             modifier = Modifier.size(imgSize.value)
@@ -84,8 +83,8 @@ fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
         MaterialTheme.spacing.standard.Vertical()
         ProjectTechSection(project)
         MaterialTheme.spacing.standard.Vertical()
-        Divider(
-            color = MaterialTheme.colors.onSecondary
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.onSecondary
                 .copy(alpha = 0.5f),
         )
         MaterialTheme.spacing.large.Vertical()
@@ -123,8 +122,8 @@ fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
             )
                 ProjectActionButton(
                     "View Project",
-                    project.logo,
-                    project.link!!
+                    project.logo.toDrawableResource(),
+                    project.link,
                 )
         }
     }

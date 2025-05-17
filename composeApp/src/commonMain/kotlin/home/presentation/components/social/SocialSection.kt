@@ -2,17 +2,17 @@ package home.presentation.components.social
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import core.theme.spacing
 import core.utils.AppConstants
-import core.utils.Horizontal
 import core.utils.Vertical
 import core.utils.getOnLinkClickHandler
 
@@ -28,8 +28,12 @@ fun SocialSection(modifier: Modifier = Modifier) {
         300.dp
     }
     Column(modifier) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(
+                MaterialTheme.spacing.standard,
+                alignment = Alignment.CenterHorizontally
+            ),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.standard),
             modifier = rowModifier
         ) {
             SocialButton(
@@ -39,7 +43,6 @@ fun SocialSection(modifier: Modifier = Modifier) {
                     getOnLinkClickHandler().onClicked(AppConstants.SocialData.first().link)
 //                    handleSocialClick(it, context, AppConstants.SocialData(context).first().link)
                 })
-            MaterialTheme.spacing.standard.Horizontal()
             SocialButton(
                 social = AppConstants.SocialData[1],
                 maxWidth = socialItemWidth,
@@ -50,8 +53,12 @@ fun SocialSection(modifier: Modifier = Modifier) {
                 })
         }
         MaterialTheme.spacing.standard.Vertical()
-        Row(
-            horizontalArrangement = Arrangement.Center,
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(
+                MaterialTheme.spacing.standard,
+                alignment = Alignment.CenterHorizontally
+            ),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.standard),
             modifier = rowModifier
         ) {
             SocialButton(
@@ -61,7 +68,6 @@ fun SocialSection(modifier: Modifier = Modifier) {
                     getOnLinkClickHandler().onClicked(AppConstants.SocialData[2].link)
 //                    handleSocialClick(it, context, AppConstants.SocialData(context)[2].link)
                 })
-            MaterialTheme.spacing.standard.Horizontal()
             SocialButton(
                 social = AppConstants.SocialData[3],
                 maxWidth = socialItemWidth,
@@ -71,8 +77,12 @@ fun SocialSection(modifier: Modifier = Modifier) {
                 })
         }
         MaterialTheme.spacing.standard.Vertical()
-        Row(
-            horizontalArrangement = Arrangement.Center,
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(
+                MaterialTheme.spacing.standard,
+                alignment = Alignment.CenterHorizontally
+            ),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.standard),
             modifier = rowModifier
         ) {
             SocialButton(
@@ -82,7 +92,6 @@ fun SocialSection(modifier: Modifier = Modifier) {
                     getOnLinkClickHandler().onClicked(AppConstants.SocialData[4].link)
 //                    handleSocialClick(it, context, AppConstants.SocialData(context)[4].link)
                 })
-            MaterialTheme.spacing.standard.Horizontal()
             SocialButton(
                 social = AppConstants.SocialData[5],
                 maxWidth = socialItemWidth,

@@ -1,10 +1,10 @@
 package home.domain.model
 
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import core.domain.model.JavaSerializable
+import kotlinx.serialization.Serializable
 
-
-data class Project @OptIn(ExperimentalResourceApi::class) constructor(
+@Serializable
+data class Project(
     val id: String,
     val title: String,
     val description: String,
@@ -15,7 +15,7 @@ data class Project @OptIn(ExperimentalResourceApi::class) constructor(
     val isAppStore: Boolean,
     val link: String? = null,
     val appStoreLink: String? = null,
-    val logo: DrawableResource,
-    val languages : List<String>
+    val logo: ProjectLogo,
+    val languages: List<String>
 //    val images: List<ProjectImage>,
-)
+) : JavaSerializable

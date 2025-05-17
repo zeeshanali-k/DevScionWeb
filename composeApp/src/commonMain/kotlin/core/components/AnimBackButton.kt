@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,6 +32,9 @@ import core.theme.fontSize
 import core.theme.interFamily
 import core.theme.spacing
 import core.utils.Horizontal
+import devscionweb.composeapp.generated.resources.Res
+import devscionweb.composeapp.generated.resources.go_back
+import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
@@ -67,16 +70,16 @@ fun AnimBackButton(onBackClicked: () -> Unit) {
         ) {
             Icon(
                 Icons.AutoMirrored.Rounded.ArrowBack, "",
-                tint = MaterialTheme.colors.onSecondary,
+                tint = MaterialTheme.colorScheme.onSecondary,
                 modifier = Modifier.size(size.value)
             )
             MaterialTheme.spacing.standard.Horizontal()
             Typist(
-                "Go Back",
+                stringResource(Res.string.go_back),
                 textStyle = TextStyle(
                     fontFamily = interFamily,
                     fontWeight = FontWeight.Normal,
-                    color = MaterialTheme.colors.onSecondary,
+                    color = MaterialTheme.colorScheme.onSecondary,
                     fontSize = MaterialTheme.fontSize.medium
                 ),
                 isInfinite = false,

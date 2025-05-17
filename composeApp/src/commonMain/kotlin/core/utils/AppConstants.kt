@@ -1,7 +1,6 @@
 package core.utils
 
 import devscionweb.composeapp.generated.resources.Res
-import devscionweb.composeapp.generated.resources.classy_logo
 import devscionweb.composeapp.generated.resources.coinpay_logo
 import devscionweb.composeapp.generated.resources.github
 import devscionweb.composeapp.generated.resources.gmail
@@ -10,24 +9,27 @@ import devscionweb.composeapp.generated.resources.medium_icon
 import devscionweb.composeapp.generated.resources.stack_overflow
 import devscionweb.composeapp.generated.resources.vc_panel_logo
 import devscionweb.composeapp.generated.resources.youtube_icon
-import devscionweb.composeapp.generated.resources.zysky_logo
 import home.domain.model.Project
+import home.domain.model.ProjectLogo
 import home.domain.model.Social
 import home.domain.model.SocialMedia
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 object AppConstants {
 
-    const val PORTFOLIO_APP = "https://play.google.com/store/apps/details?id=com.techsensei.zportfolio&hl=en&gl=US"
+    const val PORTFOLIO_APP =
+        "https://play.google.com/store/apps/details?id=com.techsensei.zportfolio&hl=en&gl=US"
 
     @OptIn(ExperimentalResourceApi::class)
     val SocialData = listOf(
-        Social(SocialMedia.LINKEDIN,
+        Social(
+            SocialMedia.LINKEDIN,
             "Connect",
             Res.drawable.linkedin,
             "https://www.linkedin.com/in/zeeshan-ali-311b511b7/"
         ),
-        Social(SocialMedia.MEDIUM,
+        Social(
+            SocialMedia.MEDIUM,
             "Medium",
             Res.drawable.medium_icon,
             "https://zeeshan-ali.medium.com/"
@@ -38,17 +40,20 @@ object AppConstants {
             Res.drawable.github,
             "https://github.com/zeeshanali-k"
         ),
-        Social(SocialMedia.STACK_OVERFLOW,
+        Social(
+            SocialMedia.STACK_OVERFLOW,
             "Stackoverflow",
             Res.drawable.stack_overflow,
             "https://stackoverflow.com/users/12803398/zeeshan-ali"
         ),
-        Social(SocialMedia.YOUTUBE,
+        Social(
+            SocialMedia.YOUTUBE,
             "Visit Channel",
             Res.drawable.youtube_icon,
             "https://www.youtube.com/@devscion"
         ),
-        Social(SocialMedia.GMAIL,
+        Social(
+            SocialMedia.GMAIL,
             "Mail Me",
             Res.drawable.gmail,
             ""
@@ -78,7 +83,7 @@ object AppConstants {
                 isPlaystore = false,
                 isAppStore = false,
                 link = "https://github.com/zeeshanali-k/classy",
-                logo = Res.drawable.classy_logo,
+                logo = ProjectLogo.ClassyLogo,
                 languages = listOf(
                     "Kotlin", "Compose Multiplatform"
                 )
@@ -95,7 +100,7 @@ object AppConstants {
                 isAppStore = true,
                 link = "https://play.google.com/store/apps/details?id=com.zysky.zysky",
                 appStoreLink = "https://apps.apple.com/pk/app/zysky/id6477992573",
-                logo = Res.drawable.zysky_logo,
+                logo = ProjectLogo.ZYSKYLogo,
                 languages = listOf(
                     "Dart", "Flutter", "Flutter Web"
                 )
@@ -110,7 +115,7 @@ object AppConstants {
                 isPlaystore = false,
                 isAppStore = false,
                 link = "https://drive.google.com/file/d/1eEUgP5R-nX0meBGTpQA9qhruBVOcSh26/view?usp=sharing",
-                logo = Res.drawable.coinpay_logo,
+                logo = ProjectLogo.CoinPayLogo,
                 languages = listOf(
                     "Kotlin", "Blockchain", "Web3J"
                 )
@@ -132,7 +137,7 @@ object AppConstants {
                 isPlaystore = true,
                 isAppStore = false,
                 link = "https://play.google.com/store/apps/details?id=com.mtn.vcpanel",
-                logo = Res.drawable.vc_panel_logo,
+                logo = ProjectLogo.VCPanel,
                 languages = listOf(
                     "Kotlin", "PHP - Laravel",
                 )

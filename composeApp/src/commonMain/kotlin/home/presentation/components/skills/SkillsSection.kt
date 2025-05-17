@@ -1,8 +1,7 @@
 package home.presentation.components.skills
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -25,7 +24,7 @@ fun SkillsSection(modifier: Modifier = Modifier) {
             textStyle = TextStyle(
                 fontFamily = interFamily,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSecondary,
+                color = MaterialTheme.colorScheme.onSecondary,
                 fontSize = MaterialTheme.fontSize.standard
             ),
             typistSpeed = TypistSpeed.FAST
@@ -41,7 +40,7 @@ fun SkillsSection(modifier: Modifier = Modifier) {
             textStyle = TextStyle(
                 fontFamily = interFamily,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSecondary,
+                color = MaterialTheme.colorScheme.onSecondary,
                 fontSize = MaterialTheme.fontSize.standard
             ),
             typistSpeed = TypistSpeed.FAST
@@ -56,7 +55,7 @@ fun SkillsSection(modifier: Modifier = Modifier) {
             textStyle = TextStyle(
                 fontFamily = interFamily,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSecondary,
+                color = MaterialTheme.colorScheme.onSecondary,
                 fontSize = MaterialTheme.fontSize.standard
             ),
             typistSpeed = TypistSpeed.FAST
