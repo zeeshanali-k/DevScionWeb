@@ -1,7 +1,7 @@
 package core.theme
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -16,11 +16,10 @@ fun DevScionWebTheme(
         LocalSpacing provides Spacing(),
         LocalDpSize provides DpSize(),
         LocalFontSize provides getWindowBasedFont(windowSize),
-        LocalWindowSize provides windowSize
     ) {
         MaterialTheme(
             content = content,
-            colors = lightColors(
+            colorScheme = lightColorScheme(
                 primary = AppColors.PRIMARY,
                 background = AppColors.BACKGROUND,
                 onBackground = AppColors.ON_BACKGROUND,

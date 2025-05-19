@@ -1,8 +1,10 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package project_details.presentation
 
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.spring
+import LocalAnimatedContentScope
+import LocalSharedTransitionScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,15 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import core.components.AnimBackButton
@@ -35,7 +33,7 @@ import devscionweb.composeapp.generated.resources.Res
 import devscionweb.composeapp.generated.resources.android_png_icon
 import devscionweb.composeapp.generated.resources.apple_logo_black
 import home.domain.model.Project
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import home.domain.model.ProjectLogo
 import org.jetbrains.compose.resources.painterResource
 import project_details.presentation.components.ProjectActionButton
 import project_details.presentation.components.ProjectTechSection
@@ -43,30 +41,21 @@ import project_details.presentation.components.ProjectTechSection
 @Composable
 fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
 
-    var tImgSize by remember {
-        mutableStateOf(30.dp)
-    }
-    val imgSize = animateDpAsState(
-        targetValue = tImgSize,
-        animationSpec = spring(
-            Spring.DampingRatioLowBouncy,
-            Spring.StiffnessLow,
-        ), label = ""
-    )
-
-    LaunchedEffect(true) {
-        tImgSize = 500.dp
-    }
-
     val scrollState = rememberScrollState()
     Column(
         Modifier.fillMaxSize()
             .verticalScroll(scrollState)
-            .background(MaterialTheme.colors.background)
+            .background(MaterialTheme.colorScheme.background)
             .padding(
                 vertical = 20.dp,
                 horizontal = 40.dp
             )
+            .then(with(LocalSharedTransitionScope.current!!) {
+                Modifier.sharedBounds(
+                    rememberSharedContentState("image_bounds_${project.id}"),
+                    LocalAnimatedContentScope.current!!,
+                )
+            })
     ) {
         MaterialTheme.spacing.standard.Vertical()
         AnimBackButton(onBackClicked)
@@ -74,28 +63,51 @@ fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
 
         Image(
             painter = painterResource(
-                project.logo
+                ProjectLogo.fromId(project.logo).toDrawableResource()
             ),
             "",
-            modifier = Modifier.size(imgSize.value)
+            modifier = Modifier.size(500.dp)
+                .then(with(LocalSharedTransitionScope.current!!) {
+                    Modifier.sharedElement(
+                        rememberSharedContentState("image_${project.id}"),
+                        LocalAnimatedContentScope.current!!,
+                    )
+                })
+                .clip(MaterialTheme.shapes.medium)
         )
 
         //Tech Section
         MaterialTheme.spacing.standard.Vertical()
         ProjectTechSection(project)
         MaterialTheme.spacing.standard.Vertical()
-        Divider(
-            color = MaterialTheme.colors.onSecondary
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.onSecondary
                 .copy(alpha = 0.5f),
         )
         MaterialTheme.spacing.large.Vertical()
 
         //Project Info
-        LargeBoldText(project.title)
+        LargeBoldText(
+            project.title,
+            modifier = Modifier
+                .then(with(LocalSharedTransitionScope.current!!) {
+                    Modifier.sharedElement(
+                        rememberSharedContentState("title_${project.id}"),
+                        LocalAnimatedContentScope.current!!,
+                    )
+                })
+        )
         MaterialTheme.spacing.medium.Vertical()
         StandardText(
             project.description,
             textAlign = TextAlign.Start,
+            modifier = Modifier
+                .then(with(LocalSharedTransitionScope.current!!) {
+                    Modifier.sharedElement(
+                        rememberSharedContentState("desc_${project.id}"),
+                        LocalAnimatedContentScope.current!!,
+                    )
+                })
         )
 
         MaterialTheme.spacing.xLarge.Vertical()
@@ -123,8 +135,8 @@ fun ProjectDetailsScreen(project: Project, onBackClicked: () -> Unit) {
             )
                 ProjectActionButton(
                     "View Project",
-                    project.logo,
-                    project.link!!
+                    ProjectLogo.fromId(project.logo).toDrawableResource(),
+                    project.link,
                 )
         }
     }

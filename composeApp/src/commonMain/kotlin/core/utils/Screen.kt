@@ -1,9 +1,9 @@
 package core.utils
 
-import home.domain.model.Project
+import kotlinx.serialization.Serializable
 
+@Serializable
+object ScreenHome
 
-sealed interface Screen {
-     data object Home : Screen
-    data class ProjectDetails(val project: Project) : Screen
-}
+@Serializable
+data class ScreenProject(val projectId: String)

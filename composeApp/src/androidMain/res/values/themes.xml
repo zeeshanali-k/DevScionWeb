@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Post.Splash.Theme.RiderApp" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+<!--    <style name="RiderApp.Theme.SplashScreen" parent="Theme.SplashScreen.IconBackground">-->
+<!--        <item name="android:windowBackground">@drawable/faras_splash_bg</item>-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>-->
+<!--        <item name="postSplashScreenTheme">@style/Post.Splash.Theme.RiderApp</item>-->
+<!--    </style>-->
+</resources>

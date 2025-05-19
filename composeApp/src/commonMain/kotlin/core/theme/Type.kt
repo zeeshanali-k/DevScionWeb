@@ -1,18 +1,16 @@
 package core.theme
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.Typography
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 
 val interFamily = FontFamily.Monospace
@@ -27,7 +25,7 @@ val interFamily = FontFamily.Monospace
 // Set of Material typography styles to start with
 //TODO
 val Typography = Typography(
-    body1 = TextStyle(
+    bodySmall = TextStyle(
         //load font from resource
         fontFamily = interFamily,
         fontWeight = FontWeight.Normal,
@@ -63,7 +61,7 @@ fun SmallText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.small
         ),
     )
@@ -86,7 +84,7 @@ fun MSmallBoldText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.mSmall
         ),
     )
@@ -109,7 +107,7 @@ fun MSmallText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.mSmall
         ),
     )
@@ -120,7 +118,7 @@ fun SmallGreyText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSurface
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         modifier = modifier,
@@ -140,7 +138,7 @@ fun SmallGreyBoldText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSurface
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         modifier = modifier,
@@ -160,7 +158,7 @@ fun MSmallGreyBoldText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSurface
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         modifier = modifier,
@@ -180,7 +178,7 @@ fun SmallPrimaryText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.primary
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
     Text(
         modifier = modifier,
@@ -200,7 +198,7 @@ fun SmallPrimaryBoldText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.primary
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
     Text(
         modifier = modifier,
@@ -220,7 +218,7 @@ fun MSmallPrimaryBoldText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.primary
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
     Text(
         modifier = modifier,
@@ -240,7 +238,7 @@ fun StandardGreyText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSurface,
+    color: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     Text(
         modifier = modifier,
@@ -260,7 +258,7 @@ fun StandardGreyBoldText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSurface,
+    color: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     Text(
         modifier = modifier,
@@ -282,7 +280,7 @@ fun StandardBoldText(
     maxLines: Int? = null,
     overflow: TextOverflow = TextOverflow.Ellipsis,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSecondary,
+    color: Color = MaterialTheme.colorScheme.onSecondary,
 ) {
     Text(
         modifier = modifier,
@@ -305,7 +303,7 @@ fun MediumGreyText(
     modifier: Modifier = Modifier,
     maxLines: Int? = null,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSurface,
+    color: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     Text(
         modifier = modifier,
@@ -327,7 +325,7 @@ fun MediumGreyBoldText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSurface,
+    color: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     Text(
         modifier = modifier,
@@ -347,7 +345,7 @@ fun MediumPrimaryText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.primary,
+    color: Color = MaterialTheme.colorScheme.primary,
 ) {
     Text(
         modifier = modifier,
@@ -367,7 +365,7 @@ fun MediumPrimarySemiBoldText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.primary,
+    color: Color = MaterialTheme.colorScheme.primary,
 ) {
     Text(
         modifier = modifier,
@@ -388,7 +386,7 @@ fun MediumPrimaryBoldText(
     modifier: Modifier = Modifier,
     maxLines: Int? = null,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.primary,
+    color: Color = MaterialTheme.colorScheme.primary,
 ) {
     Text(
         modifier = modifier,
@@ -410,7 +408,7 @@ fun MediumText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSecondary,
+    color: Color = MaterialTheme.colorScheme.onSecondary,
     maxLines: Int? = null
 ) {
     Text(
@@ -434,7 +432,7 @@ fun MediumBoldText(
     modifier: Modifier = Modifier,
     maxLines: Int? = null,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.onSecondary,
+    color: Color = MaterialTheme.colorScheme.onSecondary,
 ) {
     Text(
         modifier = modifier,
@@ -519,7 +517,7 @@ fun MediumBoldErrorText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.error,
+    color: Color = MaterialTheme.colorScheme.error,
 ) {
     Text(
         modifier = modifier,
@@ -539,7 +537,7 @@ fun LargeBoldErrorText(
     text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = MaterialTheme.colors.error,
+    color: Color = MaterialTheme.colorScheme.error,
 ) {
     Text(
         modifier = modifier,
@@ -567,7 +565,7 @@ fun StandardErrorText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.error,
+            color = MaterialTheme.colorScheme.error,
             fontSize = MaterialTheme.fontSize.standard
         ),
     )
@@ -586,7 +584,7 @@ fun StandardErrorBoldText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.error,
+            color = MaterialTheme.colorScheme.error,
             fontSize = MaterialTheme.fontSize.standard
         ),
     )
@@ -605,7 +603,7 @@ fun MediumErrorText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.error,
+            color = MaterialTheme.colorScheme.error,
             fontSize = MaterialTheme.fontSize.medium
         ),
     )
@@ -624,7 +622,7 @@ fun LargeText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.large
         ),
     )
@@ -643,7 +641,7 @@ fun XLargeText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.xLarge
         ),
     )
@@ -662,7 +660,7 @@ fun XLargeBoldText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.xLarge
         ),
     )
@@ -700,7 +698,7 @@ fun XXLargeText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.xxLarge
         ),
     )
@@ -719,7 +717,7 @@ fun XXLargeBoldText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.xxLarge
         ),
     )
@@ -738,7 +736,7 @@ fun XXXLargeText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.xxxLarge
         ),
     )
@@ -757,7 +755,7 @@ fun StandardText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.standard
         ),
     )
@@ -795,7 +793,7 @@ fun StandardPrimaryBoldText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.primary,
+            color = MaterialTheme.colorScheme.primary,
             fontSize = MaterialTheme.fontSize.standard
         ),
     )
@@ -814,7 +812,7 @@ fun LargePrimaryBoldText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.primary,
+            color = MaterialTheme.colorScheme.primary,
             fontSize = MaterialTheme.fontSize.large
         ),
     )
@@ -833,7 +831,7 @@ fun LargeBoldText(
         style = TextStyle(
             fontFamily = interFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.onSecondary,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = MaterialTheme.fontSize.large
         ),
     )

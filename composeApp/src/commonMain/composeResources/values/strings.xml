@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="go_back">Go Back</string>
+    <string name="projects">Projects</string>
+    <string name="languages">Languages</string>
+    <string name="technologies">Technologies</string>
+    <string name="architecture">Architecture</string>
+</resources>
