@@ -1,6 +1,5 @@
 package core.components
 
-import android.graphics.BlurMaskFilter
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.PaintingStyle
@@ -8,11 +7,13 @@ import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
+import org.jetbrains.skia.FilterBlurMode
+import org.jetbrains.skia.MaskFilter
 
-actual fun ContentDrawScope.drawNeonStroke(
+
+actual fun ContentDrawScope.drawTranslucentNeonStroke(
     radius: Dp,
-    color: Color,
-    backgroundColor: Color
+    color: Color
 ) {
     this.drawIntoCanvas {
         val paint =
@@ -27,7 +28,7 @@ actual fun ContentDrawScope.drawNeonStroke(
 
         this.drawIntoCanvas {
             frameworkPaint.color = color.copy(alpha = 1f).toArgb()
-            frameworkPaint.maskFilter = BlurMaskFilter(40f, BlurMaskFilter.Blur.OUTER)
+            frameworkPaint.maskFilter = MaskFilter.makeBlur(FilterBlurMode.OUTER, 40f)
             it.drawRoundRect(
                 left = 0f,
                 right = size.width,
@@ -37,8 +38,8 @@ actual fun ContentDrawScope.drawNeonStroke(
                 radiusX = radius.toPx(),
                 paint = paint
             )
-            frameworkPaint.color = color.copy(alpha = 1f).toArgb()
-            frameworkPaint.maskFilter = BlurMaskFilter(1f, BlurMaskFilter.Blur.INNER)
+            frameworkPaint.color = Color(0xFF181d20).toArgb()
+            frameworkPaint.maskFilter = MaskFilter.makeBlur(FilterBlurMode.INNER, 80f)
             it.drawRoundRect(
                 left = 0f,
                 right = size.width,
@@ -48,12 +49,6 @@ actual fun ContentDrawScope.drawNeonStroke(
                 radiusX = radius.toPx(),
                 paint = paint
             )
-//            drawRoundRect(
-//                color = neonColor.copy(alpha = 0.25f),
-//                size = size,
-////                cornerRadius = CornerRadius(radius.toPx(), radius.toPx()),
-//                style = Fill
-//            )
         }
     }
 }

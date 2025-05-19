@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 
 
 //Kotlin Logo Colors    Color(0xFFE24462), Color(0xFFB125EA), Color(0xFF7F52FF)
-object AppColors{
+object AppColors {
 
     val CardGradient =
         Brush.linearGradient(
@@ -28,7 +28,7 @@ object AppColors{
     val ERROR = Color(0xFFD73C32)
 
     val BACKGROUND = Color(0xFF181d20)
-    val ON_BACKGROUND = Color(0xFF1D1D1D)
+    val ON_BACKGROUND = Color(0xFFFFFFFF)
     val PRIMARY = Color(0xFFBB9E61)
     val BTN_COLOR = Color(0xFFE24462)
     val TEXT_COLOR = Color(0xFFFFFFFF)

@@ -4,12 +4,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 import core.theme.LargeBoldText
+import core.theme.WindowSize
 import core.theme.spacing
+import core.theme.window
 import devscionweb.composeapp.generated.resources.Res
 import devscionweb.composeapp.generated.resources.projects
 import home.domain.model.Project
@@ -22,6 +28,7 @@ fun ProjectsSection(
     scrollRotation: Float,
     projects: List<Project>,
 ) {
+    val density = LocalDensity.current
     Column(
         Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.large)
@@ -29,13 +36,21 @@ fun ProjectsSection(
         LargeBoldText(stringResource(Res.string.projects))
         FlowRow(
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            maxItemsInEachRow = 3,
+            horizontalArrangement = if (MaterialTheme.window == WindowSize.COMPACT) Arrangement.spacedBy(
+                MaterialTheme.spacing.standard,
+                Alignment.CenterHorizontally
+            ) else Arrangement.spacedBy(
+                MaterialTheme.spacing.standard,
+                Alignment.Start
+            ),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.large)
         ) {
             projects.forEach {
                 ProjectItem(
                     modifier = Modifier
-                        .fillMaxWidth(0.325f)
+                        .width(with(density) {
+                            300.dp
+                        })
                         .graphicsLayer {
                             this.rotationX = scrollRotation
                             this.rotationZ = scrollRotation / 2

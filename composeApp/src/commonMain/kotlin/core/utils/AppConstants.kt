@@ -1,13 +1,11 @@
 package core.utils
 
 import devscionweb.composeapp.generated.resources.Res
-import devscionweb.composeapp.generated.resources.coinpay_logo
 import devscionweb.composeapp.generated.resources.github
 import devscionweb.composeapp.generated.resources.gmail
 import devscionweb.composeapp.generated.resources.linkedin
 import devscionweb.composeapp.generated.resources.medium_icon
 import devscionweb.composeapp.generated.resources.stack_overflow
-import devscionweb.composeapp.generated.resources.vc_panel_logo
 import devscionweb.composeapp.generated.resources.youtube_icon
 import home.domain.model.Project
 import home.domain.model.ProjectLogo
@@ -83,7 +81,7 @@ object AppConstants {
                 isPlaystore = false,
                 isAppStore = false,
                 link = "https://github.com/zeeshanali-k/classy",
-                logo = ProjectLogo.ClassyLogo,
+                logo = ProjectLogo.ClassyLogo.id,
                 languages = listOf(
                     "Kotlin", "Compose Multiplatform"
                 )
@@ -100,7 +98,7 @@ object AppConstants {
                 isAppStore = true,
                 link = "https://play.google.com/store/apps/details?id=com.zysky.zysky",
                 appStoreLink = "https://apps.apple.com/pk/app/zysky/id6477992573",
-                logo = ProjectLogo.ZYSKYLogo,
+                logo = ProjectLogo.ZYSKYLogo.id,
                 languages = listOf(
                     "Dart", "Flutter", "Flutter Web"
                 )
@@ -115,7 +113,7 @@ object AppConstants {
                 isPlaystore = false,
                 isAppStore = false,
                 link = "https://drive.google.com/file/d/1eEUgP5R-nX0meBGTpQA9qhruBVOcSh26/view?usp=sharing",
-                logo = ProjectLogo.CoinPayLogo,
+                logo = ProjectLogo.CoinPayLogo.id,
                 languages = listOf(
                     "Kotlin", "Blockchain", "Web3J"
                 )
@@ -137,7 +135,7 @@ object AppConstants {
                 isPlaystore = true,
                 isAppStore = false,
                 link = "https://play.google.com/store/apps/details?id=com.mtn.vcpanel",
-                logo = ProjectLogo.VCPanel,
+                logo = ProjectLogo.VCPanel.id,
                 languages = listOf(
                     "Kotlin", "PHP - Laravel",
                 )

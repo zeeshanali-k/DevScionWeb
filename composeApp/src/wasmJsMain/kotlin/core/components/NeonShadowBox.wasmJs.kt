@@ -12,7 +12,8 @@ import org.jetbrains.skia.MaskFilter
 
 actual fun ContentDrawScope.drawNeonStroke(
     radius: Dp,
-    color: Color
+    color: Color,
+    backgroundColor: Color
 ) {
     this.drawIntoCanvas {
         val paint =
@@ -26,7 +27,7 @@ actual fun ContentDrawScope.drawNeonStroke(
 
 
         this.drawIntoCanvas {
-            frameworkPaint.color = color.copy(alpha = 1f).toArgb()
+            frameworkPaint.color = color.toArgb()
             frameworkPaint.maskFilter = MaskFilter.makeBlur(FilterBlurMode.OUTER, 40f)
             it.drawRoundRect(
                 left = 0f,
@@ -37,12 +38,17 @@ actual fun ContentDrawScope.drawNeonStroke(
                 radiusX = radius.toPx(),
                 paint = paint
             )
-//            drawRoundRect(
-//                color = neonColor.copy(alpha = 0.25f),
-//                size = size,
-////                cornerRadius = CornerRadius(radius.toPx(), radius.toPx()),
-//                style = Fill
-//            )
+            frameworkPaint.color = backgroundColor.toArgb()
+            frameworkPaint.maskFilter = MaskFilter.makeBlur(FilterBlurMode.INNER, 1f)
+            it.drawRoundRect(
+                left = 0f,
+                right = size.width,
+                bottom = size.height,
+                top = 0f,
+                radiusY = radius.toPx(),
+                radiusX = radius.toPx(),
+                paint = paint
+            )
         }
     }
 }

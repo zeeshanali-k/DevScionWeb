@@ -20,13 +20,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import core.theme.AppColors
 
+//import org.jetbrains.skia.FilterBlurMode
+//import org.jetbrains.skia.MaskFilter
+
 @Composable
-fun NeonShadowBox(
+fun TranslucentNeonShadowBox(
     modifier: Modifier = Modifier,
     innerModifier: Modifier = Modifier,
     radius: Dp = 6.dp,
     color: Color = AppColors.NEON,
-    backgroundColor: Color = Color.Transparent,
     content: @Composable () -> Unit
 ) {
 
@@ -45,10 +47,9 @@ fun NeonShadowBox(
     Box(
         modifier.drawWithCache {
             onDrawWithContent {
-                drawNeonStroke(
+                drawTranslucentNeonStroke(
                     radius = radius,
-                    color = color,
-                    backgroundColor = backgroundColor
+                    color = color
                 )
                 drawContent()
             }
@@ -65,4 +66,4 @@ fun NeonShadowBox(
     }
 }
 
-expect fun ContentDrawScope.drawNeonStroke(radius: Dp, color: Color, backgroundColor: Color)
+expect fun ContentDrawScope.drawTranslucentNeonStroke(radius: Dp, color: Color)

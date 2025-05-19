@@ -9,10 +9,9 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 
-actual fun ContentDrawScope.drawNeonStroke(
+actual fun ContentDrawScope.drawTranslucentNeonStroke(
     radius: Dp,
-    color: Color,
-    backgroundColor: Color
+    color: Color
 ) {
     this.drawIntoCanvas {
         val paint =
@@ -37,8 +36,8 @@ actual fun ContentDrawScope.drawNeonStroke(
                 radiusX = radius.toPx(),
                 paint = paint
             )
-            frameworkPaint.color = color.copy(alpha = 1f).toArgb()
-            frameworkPaint.maskFilter = BlurMaskFilter(1f, BlurMaskFilter.Blur.INNER)
+            frameworkPaint.color = Color.DarkGray.copy(alpha = 1f).toArgb()
+            frameworkPaint.maskFilter = BlurMaskFilter(40f, BlurMaskFilter.Blur.INNER)
             it.drawRoundRect(
                 left = 0f,
                 right = size.width,

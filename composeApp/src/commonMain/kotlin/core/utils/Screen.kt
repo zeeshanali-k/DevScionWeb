@@ -1,8 +1,9 @@
 package core.utils
 
-sealed class Screen(val route: String) {
+import kotlinx.serialization.Serializable
 
-    data object Home : Screen("home")
-    data object Project : Screen("project")
+@Serializable
+object ScreenHome
 
-}
+@Serializable
+data class ScreenProject(val projectId: String)

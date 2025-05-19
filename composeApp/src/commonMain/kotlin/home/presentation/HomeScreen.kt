@@ -19,24 +19,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import core.components.NeonShadowBox
+import core.components.TranslucentNeonShadowBox
 import core.theme.LargeBoldText
 import core.theme.WindowSize
 import core.theme.spacing
@@ -48,6 +45,7 @@ import core.utils.getOnLinkClickHandler
 import devscionweb.composeapp.generated.resources.Res
 import devscionweb.composeapp.generated.resources.playstore_icon
 import home.domain.model.Project
+import home.presentation.components.HeaderContent
 import home.presentation.components.TitlesSection
 import home.presentation.components.projects.ProjectsSection
 import home.presentation.components.skills.SkillsSection
@@ -56,13 +54,28 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 
-//TODO: add Shared Element Transition animation to projects
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
     onProjectClicked: (project: Project) -> Unit,
 ) {
+
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle(HomeState()).value
     val listState = rememberLazyListState()
+
+    LaunchedEffect(uiState.selectedHomeSection) {
+        if (uiState.selectedHomeSection == HomeSection.Top) {
+            listState.animateScrollToItem(0)
+        } else {
+            listState.animateScrollToItem(uiState.selectedHomeSection.index)
+        }
+    }
+
+    LaunchedEffect(listState.firstVisibleItemIndex) {
+        if (listState.isScrollInProgress.not()) {
+            viewModel.onSectionSelected(HomeSection.fromIndex(listState.firstVisibleItemIndex))
+        }
+    }
 
     val zTranslationTarget = remember {
         mutableStateOf(0f)
@@ -108,34 +121,19 @@ fun HomeScreen(
         ) {
 
             stickyHeader {
-                //TODO: Add Sections Redirect buttons
                 MaterialTheme.spacing.standard.Vertical()
-                Box(
+                TranslucentNeonShadowBox(
                     Modifier.fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.background)
+                        .graphicsLayer {
+                            rotationX = zTranslation.value / 2
+                        },
+                    radius = 25.dp
                 ) {
-                    NeonShadowBox(
-                        Modifier.fillMaxWidth()
-                            .graphicsLayer {
-                                rotationX = zTranslation.value
-                            },
-                        radius = 25.dp
-                    ) {
-                        Row(
-                            Modifier.fillMaxWidth()
-                                .clip(RoundedCornerShape(25.dp))
-                                .padding(MaterialTheme.spacing.large),
-                            horizontalArrangement = Arrangement.Start
-                        ) {
-                            Text(
-                                "@DevScion",
-                                color = Color.White,
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                        }
-                    }
+                    HeaderContent(
+                        modifier = Modifier.fillMaxWidth(),
+                        selectedHomeSection = uiState.selectedHomeSection,
+                        onSectionSelected = viewModel::onSectionSelected
+                    )
                 }
             }
             item {
@@ -143,70 +141,80 @@ fun HomeScreen(
 
                 TitlesSection(Modifier.fillMaxWidth())
             }
-            item {
-                MaterialTheme.spacing.xLarge.Vertical()
-                if (MaterialTheme.window == WindowSize.EXPANDED) {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-
-                        SkillsSection(Modifier.weight(1f))
-
-                        MaterialTheme.spacing.standard.Horizontal()
-
-                        SocialSection(Modifier.weight(1f))
-                    }
-                } else {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Top
-                    ) {
-                        SkillsSection(Modifier.fillMaxWidth())
-
-                        MaterialTheme.spacing.large.Vertical()
-
-                        SocialSection(Modifier.fillMaxWidth())
+            if (uiState.isLoading) {
+                item {
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
                     }
                 }
-
-                MaterialTheme.spacing.xLarge.Vertical()
-            }
-            item {
-                ProjectsSection(
-                    onProjectClicked = onProjectClicked,
-                    scrollRotation = zTranslation.value,
-                    projects = viewModel.projects.collectAsState().value
-                )
-                MaterialTheme.spacing.xLarge.Vertical()
-                MaterialTheme.spacing.large.Vertical()
-            }
-            item {
-                Box(
-                    Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    NeonShadowBox {
+            } else {
+                item {
+                    MaterialTheme.spacing.xLarge.Vertical()
+                    if (MaterialTheme.window == WindowSize.EXPANDED) {
                         Row(
-                            Modifier.clickable {
-                                getOnLinkClickHandler()
-                                    .onClicked(AppConstants.PORTFOLIO_APP)
-                            }.padding(MaterialTheme.spacing.medium),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
-                                painterResource(Res.drawable.playstore_icon),
-                                "",
-                                modifier = Modifier.size(70.dp),
-                                contentScale = ContentScale.Crop
-                            )
+
+                            SkillsSection(Modifier.weight(1f), uiState.skills)
+
                             MaterialTheme.spacing.standard.Horizontal()
-                            LargeBoldText("Download Portfolio App")
+
+                            SocialSection(Modifier.weight(1f), uiState.socialData)
+                        }
+                    } else {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Top
+                        ) {
+                            SkillsSection(Modifier.fillMaxWidth(), uiState.skills)
+
+                            MaterialTheme.spacing.large.Vertical()
+
+                            SocialSection(Modifier.fillMaxWidth(), uiState.socialData)
                         }
                     }
+
+                    MaterialTheme.spacing.xLarge.Vertical()
                 }
-                MaterialTheme.spacing.xLarge.Vertical()
+                item {
+                    ProjectsSection(
+                        onProjectClicked = onProjectClicked,
+                        scrollRotation = zTranslation.value,
+                        projects = uiState.projects
+                    )
+                    MaterialTheme.spacing.xLarge.Vertical()
+                    MaterialTheme.spacing.large.Vertical()
+                }
+                item {
+                    Box(
+                        Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        NeonShadowBox(
+                            color = MaterialTheme.colorScheme.secondary,
+                        ) {
+                            Row(
+                                Modifier.clickable {
+                                    getOnLinkClickHandler()
+                                        .onClicked(AppConstants.PORTFOLIO_APP)
+                                }.padding(MaterialTheme.spacing.medium),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Image(
+                                    painterResource(Res.drawable.playstore_icon),
+                                    "",
+                                    modifier = Modifier.size(70.dp),
+                                    contentScale = ContentScale.Crop
+                                )
+                                MaterialTheme.spacing.standard.Horizontal()
+                                LargeBoldText("Download Portfolio App")
+                            }
+                        }
+                    }
+                    MaterialTheme.spacing.xLarge.Vertical()
+                }
             }
         }
     }

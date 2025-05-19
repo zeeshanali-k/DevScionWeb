@@ -3,20 +3,25 @@ package home.domain.model
 import devscionweb.composeapp.generated.resources.Res
 import devscionweb.composeapp.generated.resources.classy_logo
 import devscionweb.composeapp.generated.resources.coinpay_logo
-import devscionweb.composeapp.generated.resources.flutter
 import devscionweb.composeapp.generated.resources.vc_panel_logo
 import devscionweb.composeapp.generated.resources.zysky_logo
-import home.domain.model.ProjectLogo.ClassyLogo
-import home.domain.model.ProjectLogo.ZYSKYLogo
-import kotlinx.serialization.Serializable
 
-@Serializable
-sealed class ProjectLogo() {
+sealed class ProjectLogo(val id: Int) {
 
-    object ClassyLogo : ProjectLogo()
-    object ZYSKYLogo : ProjectLogo()
-    object CoinPayLogo : ProjectLogo()
-    object VCPanel : ProjectLogo()
+    object ClassyLogo : ProjectLogo(1)
+    object ZYSKYLogo : ProjectLogo(2)
+    object CoinPayLogo : ProjectLogo(3)
+    object VCPanel : ProjectLogo(4)
+
+    companion object {
+        fun fromId(id: Int) = when (id) {
+            1 -> ClassyLogo
+            2 -> ZYSKYLogo
+            3 -> CoinPayLogo
+            4 -> VCPanel
+            else -> throw IllegalArgumentException("Invalid id")
+        }
+    }
 
     fun toDrawableResource() = when (this) {
         ClassyLogo -> Res.drawable.classy_logo

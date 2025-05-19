@@ -11,16 +11,21 @@ import com.devscion.typistcmp.TypistSpeed
 import core.theme.fontSize
 import core.theme.interFamily
 import core.theme.spacing
-import core.utils.AppConstants
 import core.utils.Vertical
+import devscionweb.composeapp.generated.resources.Res
+import devscionweb.composeapp.generated.resources.architecture
+import devscionweb.composeapp.generated.resources.languages
+import devscionweb.composeapp.generated.resources.technologies
+import home.presentation.Skills
+import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
-fun SkillsSection(modifier: Modifier = Modifier) {
+fun SkillsSection(modifier: Modifier = Modifier, skills: Skills) {
 
     Column(modifier) {
         Typist(
-            text = "Languages",
+            text = stringResource(Res.string.languages),
             textStyle = TextStyle(
                 fontFamily = interFamily,
                 fontWeight = FontWeight.Bold,
@@ -31,12 +36,12 @@ fun SkillsSection(modifier: Modifier = Modifier) {
         )
 
         MaterialTheme.spacing.large.Vertical()
-        SkillsRow(skills = AppConstants.LANGUAGES)
+        SkillsRow(skills = skills.languages)
 
         MaterialTheme.spacing.large.Vertical()
 
         Typist(
-            text = "Technologies",
+            text = stringResource(Res.string.technologies),
             textStyle = TextStyle(
                 fontFamily = interFamily,
                 fontWeight = FontWeight.Bold,
@@ -46,12 +51,12 @@ fun SkillsSection(modifier: Modifier = Modifier) {
             typistSpeed = TypistSpeed.FAST
         )
         MaterialTheme.spacing.large.Vertical()
-        SkillsRow(skills = AppConstants.TECH)
+        SkillsRow(skills = skills.tech)
         MaterialTheme.spacing.large.Vertical()
 
 
         Typist(
-            text = "Architecture",
+            text = stringResource(Res.string.architecture),
             textStyle = TextStyle(
                 fontFamily = interFamily,
                 fontWeight = FontWeight.Bold,
@@ -61,7 +66,7 @@ fun SkillsSection(modifier: Modifier = Modifier) {
             typistSpeed = TypistSpeed.FAST
         )
         MaterialTheme.spacing.large.Vertical()
-        SkillsRow(skills = AppConstants.OTHER)
+        SkillsRow(skills = skills.other)
         MaterialTheme.spacing.large.Vertical()
 
     }

@@ -45,20 +45,23 @@ kotlin {
     sourceSets {
 
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.components.resources)
             implementation(compose.material3)
-            implementation(compose.ui)
+            api(compose.components.uiToolingPreview)
+
             api(libs.typist.cmp)
-            implementation(compose.components.resources)
             implementation(libs.material.icons.core)
             api(libs.kotlinx.serialization.json.okio)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.viewmodel.navigation)
             implementation(libs.kermit)
+            implementation(libs.kotlinx.serialization.json)
 
         }
     }

@@ -12,13 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import core.theme.spacing
-import core.utils.AppConstants
 import core.utils.Vertical
 import core.utils.getOnLinkClickHandler
+import home.domain.model.Social
 
 
 @Composable
-fun SocialSection(modifier: Modifier = Modifier) {
+fun SocialSection(modifier: Modifier = Modifier, socialData: List<Social>) {
     val rowModifier = remember {
         Modifier
             .fillMaxWidth()
@@ -37,19 +37,19 @@ fun SocialSection(modifier: Modifier = Modifier) {
             modifier = rowModifier
         ) {
             SocialButton(
-                social = AppConstants.SocialData.first(),
+                social = socialData.first(),
                 maxWidth = socialItemWidth,
                 onClick = {
-                    getOnLinkClickHandler().onClicked(AppConstants.SocialData.first().link)
-//                    handleSocialClick(it, context, AppConstants.SocialData(context).first().link)
+                    getOnLinkClickHandler().onClicked(socialData.first().link)
+//                    handleSocialClick(it, context, socialData(context).first().link)
                 })
             SocialButton(
-                social = AppConstants.SocialData[1],
+                social = socialData[1],
                 maxWidth = socialItemWidth,
                 onClick = {
 
-                    getOnLinkClickHandler().onClicked(AppConstants.SocialData[1].link)
-//                    handleSocialClick(it, context, AppConstants.SocialData(context)[1].link)
+                    getOnLinkClickHandler().onClicked(socialData[1].link)
+//                    handleSocialClick(it, context, socialData(context)[1].link)
                 })
         }
         MaterialTheme.spacing.standard.Vertical()
@@ -62,18 +62,18 @@ fun SocialSection(modifier: Modifier = Modifier) {
             modifier = rowModifier
         ) {
             SocialButton(
-                social = AppConstants.SocialData[2],
+                social = socialData[2],
                 maxWidth = socialItemWidth,
                 onClick = {
-                    getOnLinkClickHandler().onClicked(AppConstants.SocialData[2].link)
-//                    handleSocialClick(it, context, AppConstants.SocialData(context)[2].link)
+                    getOnLinkClickHandler().onClicked(socialData[2].link)
+//                    handleSocialClick(it, context, socialData(context)[2].link)
                 })
             SocialButton(
-                social = AppConstants.SocialData[3],
+                social = socialData[3],
                 maxWidth = socialItemWidth,
                 onClick = {
-                    getOnLinkClickHandler().onClicked(AppConstants.SocialData[3].link)
-//                    handleSocialClick(it, context, AppConstants.SocialData(context)[3].link)
+                    getOnLinkClickHandler().onClicked(socialData[3].link)
+//                    handleSocialClick(it, context, socialData(context)[3].link)
                 })
         }
         MaterialTheme.spacing.standard.Vertical()
@@ -86,14 +86,14 @@ fun SocialSection(modifier: Modifier = Modifier) {
             modifier = rowModifier
         ) {
             SocialButton(
-                social = AppConstants.SocialData[4],
+                social = socialData[4],
                 maxWidth = socialItemWidth,
                 onClick = {
-                    getOnLinkClickHandler().onClicked(AppConstants.SocialData[4].link)
-//                    handleSocialClick(it, context, AppConstants.SocialData(context)[4].link)
+                    getOnLinkClickHandler().onClicked(socialData[4].link)
+//                    handleSocialClick(it, context, socialData(context)[4].link)
                 })
             SocialButton(
-                social = AppConstants.SocialData[5],
+                social = socialData[5],
                 maxWidth = socialItemWidth,
                 onClick = {
                     getOnLinkClickHandler().onMailClicked("connectzeeshanali@gmail.com")

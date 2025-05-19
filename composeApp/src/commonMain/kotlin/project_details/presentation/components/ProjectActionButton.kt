@@ -32,9 +32,12 @@ fun ProjectActionButton(
     icon: DrawableResource,
     url: String,
 ) {
-    NeonShadowBox(Modifier.clickable {
-        getOnLinkClickHandler().onClicked(url)
-    }) {
+    NeonShadowBox(
+        Modifier.clickable {
+            getOnLinkClickHandler().onClicked(url)
+        },
+        color = MaterialTheme.colorScheme.secondary,
+    ) {
         Box(
             Modifier.background(MaterialTheme.colorScheme.background)
                 .padding(
