@@ -11,14 +11,13 @@ import home.domain.model.Project
 import home.domain.model.ProjectLogo
 import home.domain.model.Social
 import home.domain.model.SocialMedia
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import kotlin.uuid.ExperimentalUuidApi
 
 object AppConstants {
 
     const val PORTFOLIO_APP =
         "https://play.google.com/store/apps/details?id=com.techsensei.zportfolio&hl=en&gl=US"
 
-    @OptIn(ExperimentalResourceApi::class)
     val SocialData = listOf(
         Social(
             SocialMedia.LINKEDIN,
@@ -68,11 +67,27 @@ object AppConstants {
         "MVVM", "Clean Architecture", "Agile Development"
     )
 
-    @OptIn(ExperimentalResourceApi::class)
+    @OptIn(ExperimentalUuidApi::class)
     fun getAllProjects() =
         listOf(
             Project(
-                id = "1",
+                id = ProjectLogo.FeresLogo.id.toString(),
+                title = "Feres",
+                description = "Ethiopia's Leading Taxi App built entirely in KMP for Shared Business and Compose Multiplatform for Shared (More than 90%) UI.",
+                isAndroid = false,
+                isHybrid = false,
+                isKMP = true,
+                isPlaystore = true,
+                isAppStore = true,
+                link = "https://play.google.com/store/apps/details?id=com.feres.user&hl=en",
+                appStoreLink = "https://apps.apple.com/us/app/feres/id1477739364",
+                logo = ProjectLogo.FeresLogo.id,
+                tech = listOf(
+                    "Kotlin", "Compose Multiplatform"
+                )
+            ),
+            Project(
+                id = ProjectLogo.ClassyLogo.id.toString(),
                 title = "Classy",
                 description = "A KMP Open Source Text to Image and Image Captioning app for Mobile, Web and Desktop",
                 isAndroid = false,
@@ -82,12 +97,12 @@ object AppConstants {
                 isAppStore = false,
                 link = "https://github.com/zeeshanali-k/classy",
                 logo = ProjectLogo.ClassyLogo.id,
-                languages = listOf(
+                tech = listOf(
                     "Kotlin", "Compose Multiplatform"
                 )
             ),
             Project(
-                id = "2",
+                id = ProjectLogo.ZYSKYLogo.id.toString(),
                 title = "ZYSKY",
                 description = "A Benefits application for ZYSKY system users built using Flutter. It has different modules including user app and admin panel, both built in Flutter and Flutter Web respectively.\n" +
                         "Partners and Employers Portal: https://pp.zysky.pl",
@@ -99,12 +114,12 @@ object AppConstants {
                 link = "https://play.google.com/store/apps/details?id=com.zysky.zysky",
                 appStoreLink = "https://apps.apple.com/pk/app/zysky/id6477992573",
                 logo = ProjectLogo.ZYSKYLogo.id,
-                languages = listOf(
+                tech = listOf(
                     "Dart", "Flutter", "Flutter Web"
                 )
             ),
             Project(
-                id = "3",
+                id = ProjectLogo.CoinPayLogo.id.toString(),
                 title = "CoinPay",
                 description = "A full fledged crypto wallet with all the features, including sending, receiving and balance checking with support for multiple blockchains like Ethereum, Polygon, Binance Smart Chain etc. The app also has the feature to save address in Address Book for quick use.",
                 isAndroid = true,
@@ -114,12 +129,12 @@ object AppConstants {
                 isAppStore = false,
                 link = "https://drive.google.com/file/d/1eEUgP5R-nX0meBGTpQA9qhruBVOcSh26/view?usp=sharing",
                 logo = ProjectLogo.CoinPayLogo.id,
-                languages = listOf(
+                tech = listOf(
                     "Kotlin", "Blockchain", "Web3J"
                 )
             ),
             Project(
-                id = "4",
+                id = ProjectLogo.VCPanel.id.toString(),
                 title = "VC Panel",
                 description = "VC Panel is Vehicle Tracking Anti Theft system. It allows you to track your vehicle, by attaching a device, from your mobile phone. It has following features:\n" +
                         "\n" +
@@ -136,7 +151,7 @@ object AppConstants {
                 isAppStore = false,
                 link = "https://play.google.com/store/apps/details?id=com.mtn.vcpanel",
                 logo = ProjectLogo.VCPanel.id,
-                languages = listOf(
+                tech = listOf(
                     "Kotlin", "PHP - Laravel",
                 )
             ),

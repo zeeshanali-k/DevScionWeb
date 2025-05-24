@@ -1,5 +1,6 @@
 package home.presentation
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.ViewModel
 import core.utils.AppConstants
 import home.domain.model.Project
@@ -8,6 +9,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 
 class HomeViewModel : ViewModel() {
+
+    val listState = LazyListState()
 
     private val projects = MutableStateFlow(emptyList<Project>())
 

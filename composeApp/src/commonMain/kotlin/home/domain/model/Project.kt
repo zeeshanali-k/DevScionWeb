@@ -12,6 +12,6 @@ data class Project(
     val link: String? = null,
     val appStoreLink: String? = null,
     val logo: Int,
-    val languages: List<String>
+    val tech: List<String>
 //    val images: List<ProjectImage>,
 )

@@ -15,6 +15,7 @@ data class Spacing(
     val medium: Dp = 20.dp,
     val standard: Dp = 25.dp,
     val large: Dp = 35.dp,
+    val mLarge: Dp = 40.dp,
     val xLarge: Dp = 50.dp,
     val xxLarge: Dp = 60.dp,
     val xxxLarge: Dp = 70.dp,

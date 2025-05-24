@@ -1,28 +1,28 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package home.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,19 +49,15 @@ import core.utils.Horizontal
 import core.utils.Vertical
 import devscionweb.composeapp.generated.resources.Res
 import devscionweb.composeapp.generated.resources.android_png_icon
-import devscionweb.composeapp.generated.resources.flutter
+import devscionweb.composeapp.generated.resources.kmp
 import devscionweb.composeapp.generated.resources.my_img
-import kotlinx.coroutines.delay
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import devscionweb.composeapp.generated.resources.name
+import home.domain.model.TechnicalSkill
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
+private const val TARGET_IMAGE_SIZE = 200f
 
-val SKILLS = listOf(
-    "Android Developer",
-    "Flutter Developer"
-)
-
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun TitlesSection(modifier: Modifier = Modifier) {
     var tImgSize by remember {
@@ -77,54 +73,49 @@ fun TitlesSection(modifier: Modifier = Modifier) {
     )
 
     LaunchedEffect(true) {
-        tImgSize = 200.dp
+        tImgSize = TARGET_IMAGE_SIZE.dp
     }
 
     var currentImage by remember {
-        mutableStateOf<SkillImage>(SkillImage.Android)
+        mutableStateOf<TechnicalSkill>(TechnicalSkill.Android)
     }
 
     val windowSize = MaterialTheme.window
 
-    LaunchedEffect(true) {
-        while (true) {
-            delay(
-                currentImage.title.length.toLong() * (TypistSpeed.FAST.value + 5)
-            )
-            currentImage = if (currentImage == SkillImage.Android)
-                SkillImage.Flutter
-            else SkillImage.Android
-        }
-    }
-
     if (windowSize == WindowSize.EXPANDED) {
-        DesktopView(modifier, imgSize, currentImage)
+        DesktopView(modifier, imgSize.value, currentImage, onAnimationEnd = {
+            currentImage = if (currentImage == TechnicalSkill.Android)
+                TechnicalSkill.KMP
+            else TechnicalSkill.Android
+        })
     } else {
-        MobileView(modifier, imgSize, currentImage)
+        MobileView(modifier, imgSize.value, currentImage, onAnimationEnd = {
+            currentImage = if (currentImage == TechnicalSkill.Android)
+                TechnicalSkill.KMP
+            else TechnicalSkill.Android
+        })
 
     }
 
 }
 
 @Composable
-fun MobileView(modifier: Modifier, imgSize: State<Dp>, currentImage: SkillImage) {
+fun MobileView(
+    modifier: Modifier,
+    imgSize: Dp,
+    currentImage: TechnicalSkill,
+    onAnimationEnd: () -> Unit,
+) {
     Column(
         modifier
             .padding(MaterialTheme.spacing.large),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-        Image(
-            painter = painterResource(Res.drawable.my_img),
-            contentDescription = "portfolio image",
-            contentScale = ContentScale.Inside,
-            modifier = Modifier
-                .size(imgSize.value)
-                .clip(RoundedCornerShape(50))
-        )
+        ImageNameSection(imgSize)
         MaterialTheme.spacing.standard.Vertical()
         Typist(
-            SKILLS,
+            remember { listOf(TechnicalSkill.Android.title, TechnicalSkill.KMP.title) },
             textStyle = TextStyle(
                 fontSize = MaterialTheme.fontSize.xLarge,
                 color = Color.White,
@@ -136,6 +127,7 @@ fun MobileView(modifier: Modifier, imgSize: State<Dp>, currentImage: SkillImage)
             isCursorVisible = true,
             isBlinkingCursor = false,
             cursorColor = AppColors.NEON,
+            onAnimationEnd = onAnimationEnd
         )
 
         MaterialTheme.spacing.large.Vertical()
@@ -148,20 +140,20 @@ fun MobileView(modifier: Modifier, imgSize: State<Dp>, currentImage: SkillImage)
                 verticalArrangement = Arrangement.Center
             ) {
                 AnimatedVisibility(
-                    currentImage == SkillImage.Flutter,
-                    enter = fadeIn() + slideInVertically(),
-                    exit = fadeOut() + slideOutVertically()
+                    currentImage == TechnicalSkill.KMP,
+                    enter = fadeIn() + scaleIn(),
+                    exit = fadeOut() + scaleOut()
                 ) {
                     Image(
-                        painter = painterResource(Res.drawable.flutter),
+                        painter = painterResource(Res.drawable.kmp),
                         contentDescription = "",
                         modifier = Modifier.size(200.dp)
                     )
                 }
                 AnimatedVisibility(
-                    currentImage == SkillImage.Android,
-                    enter = fadeIn() + slideInVertically(),
-                    exit = fadeOut() + slideOutVertically()
+                    currentImage == TechnicalSkill.Android,
+                    enter = fadeIn() + scaleIn(),
+                    exit = fadeOut() + scaleOut()
                 ) {
                     Image(
                         painter = painterResource(Res.drawable.android_png_icon),
@@ -174,26 +166,60 @@ fun MobileView(modifier: Modifier, imgSize: State<Dp>, currentImage: SkillImage)
     }
 }
 
+@Composable
+fun ImageNameSection(imgSize: Dp) {
+    NeonShadowBox(
+        innerModifier = Modifier.padding(MaterialTheme.spacing.standard)
+    ) {
+        Column(
+            Modifier
+                .widthIn(min = TARGET_IMAGE_SIZE.dp)
+                .heightIn(min = TARGET_IMAGE_SIZE.dp)
+                .animateContentSize(),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.standard),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Image(
+                painter = painterResource(Res.drawable.my_img),
+                contentDescription = "portfolio image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(imgSize)
+                    .clip(CircleShape)
+            )
+            if (imgSize.value == TARGET_IMAGE_SIZE) {
+                Typist(
+                    stringResource(Res.string.name),
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontSize = MaterialTheme.fontSize.standard
+                    ),
+                    isInfiniteCursor = false,
+                    cursorColor = MaterialTheme.colorScheme.onBackground,
+                )
+            }
+        }
+    }
+}
+
 
 @Composable
-fun DesktopView(modifier: Modifier, imgSize: State<Dp>, currentImage: SkillImage) {
+fun DesktopView(
+    modifier: Modifier,
+    imgSize: Dp,
+    currentImage: TechnicalSkill,
+    onAnimationEnd: () -> Unit,
+) {
     Row(
         modifier
             .padding(MaterialTheme.spacing.large),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(Res.drawable.my_img),
-            contentDescription = "portfolio image",
-            contentScale = ContentScale.Inside,
-            modifier = Modifier
-                .size(imgSize.value)
-                .clip(RoundedCornerShape(50))
-        )
-        MaterialTheme.spacing.standard.Horizontal()
+        ImageNameSection(imgSize)
+        MaterialTheme.spacing.large.Horizontal()
         Typist(
-            SKILLS,
+            remember { listOf(TechnicalSkill.Android.title, TechnicalSkill.KMP.title) },
             textStyle = TextStyle(
                 fontSize = MaterialTheme.fontSize.xLarge,
                 color = Color.White,
@@ -205,33 +231,34 @@ fun DesktopView(modifier: Modifier, imgSize: State<Dp>, currentImage: SkillImage
             isCursorVisible = true,
             isBlinkingCursor = false,
             cursorColor = AppColors.NEON,
-            modifier = Modifier.fillMaxWidth(0.3f)
+            modifier = Modifier.fillMaxWidth(0.35f),
+            onAnimationEnd = onAnimationEnd
         )
 
         MaterialTheme.spacing.large.Horizontal()
         NeonShadowBox {
             Column(
                 Modifier
-                    .height(200.dp)
+                    .size(200.dp)
                     .padding(horizontal = MaterialTheme.spacing.standard),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 AnimatedVisibility(
-                    currentImage == SkillImage.Flutter,
-                    enter = fadeIn() + slideInVertically(),
-                    exit = fadeOut() + slideOutVertically()
+                    currentImage == TechnicalSkill.KMP,
+                    enter = fadeIn() + scaleIn(),
+                    exit = fadeOut() + scaleOut()
                 ) {
                     Image(
-                        painter = painterResource(Res.drawable.flutter),
+                        painter = painterResource(Res.drawable.kmp),
                         contentDescription = "",
                         modifier = Modifier.size(200.dp)
                     )
                 }
                 AnimatedVisibility(
-                    currentImage == SkillImage.Android,
-                    enter = fadeIn() + slideInVertically(),
-                    exit = fadeOut() + slideOutVertically()
+                    currentImage == TechnicalSkill.Android,
+                    enter = fadeIn() + scaleIn(),
+                    exit = fadeOut() + scaleOut()
                 ) {
                     Image(
                         painter = painterResource(Res.drawable.android_png_icon),
@@ -242,9 +269,4 @@ fun DesktopView(modifier: Modifier, imgSize: State<Dp>, currentImage: SkillImage
             }
         }
     }
-}
-
-sealed class SkillImage(val title: String) {
-    data object Android : SkillImage("Android Developer")
-    data object Flutter : SkillImage("Flutter Developer")
 }

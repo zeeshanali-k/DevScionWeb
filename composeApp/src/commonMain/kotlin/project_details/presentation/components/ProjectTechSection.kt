@@ -3,13 +3,10 @@ package project_details.presentation.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -22,29 +19,33 @@ import core.components.NeonShadowBox
 import core.theme.AppColors
 import core.theme.MediumText
 import core.theme.spacing
-import core.utils.Horizontal
 import devscionweb.composeapp.generated.resources.Res
 import devscionweb.composeapp.generated.resources.android_png_icon
 import devscionweb.composeapp.generated.resources.flutter
 import devscionweb.composeapp.generated.resources.kmp
+import devscionweb.composeapp.generated.resources.tech
 import home.domain.model.Project
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun ProjectTechSection(project: Project) {
-    Row(
+    FlowRow(
         Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
+        horizontalArrangement = Arrangement.spacedBy(
+            MaterialTheme.spacing.standard,
+            alignment = Alignment.CenterHorizontally
+        ),
+        verticalArrangement = Arrangement.Center
     ) {
-        NeonShadowBox(color = AppColors.NEON3) {
-            Box(Modifier.padding(MaterialTheme.spacing.small)) {
-                MediumText("Tech")
-            }
+        NeonShadowBox(
+            color = AppColors.NEON3,
+            innerModifier = Modifier.padding(MaterialTheme.spacing.small)
+        ) {
+            MediumText(stringResource(Res.string.tech))
         }
-        MaterialTheme.spacing.standard.Horizontal()
         Image(
             painterResource(
                 if (project.isAndroid)
@@ -59,26 +60,18 @@ fun ProjectTechSection(project: Project) {
             modifier = Modifier
                 .clip(RoundedCornerShape(10))
                 .size(70.dp),
-//                .aspectRatio(8f / 3f),
             contentScale = ContentScale.Fit,
         )
-        MaterialTheme.spacing.standard.Horizontal()
-        LazyRow(Modifier.fillMaxWidth()) {
-            items(project.languages) {
-                Row {
-                    Box(
-                        Modifier.border(
-                            1.dp, MaterialTheme.colorScheme.onSecondary.copy(0.5f),
-                            shape = RoundedCornerShape(10.dp)
-                        )
-                            .padding(MaterialTheme.spacing.small),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        MediumText(it)
-                    }
-                    MaterialTheme.spacing.medium.Horizontal()
-                }
-            }
+        project.tech.forEach {
+            MediumText(
+                it,
+                modifier =
+                    Modifier.border(
+                        1.dp, MaterialTheme.colorScheme.onSecondary.copy(0.5f),
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                        .padding(MaterialTheme.spacing.small),
+            )
         }
     }
 }

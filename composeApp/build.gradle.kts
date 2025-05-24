@@ -45,9 +45,9 @@ kotlin {
     sourceSets {
 
         commonMain.dependencies {
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.components.resources)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.components.resources)
             implementation(compose.material3)
             api(compose.components.uiToolingPreview)
 
@@ -63,8 +63,15 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.kotlinx.serialization.json)
 
+            //For image colors extraction
+            implementation(libs.material.kolor)
+
         }
     }
+}
+
+dependencies {
+    debugImplementation(libs.androidx.ui.tooling)
 }
 
 
