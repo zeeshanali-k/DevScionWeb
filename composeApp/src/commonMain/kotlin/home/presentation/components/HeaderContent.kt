@@ -28,7 +28,7 @@ fun HeaderContent(
 ) {
     FlowRow(
         modifier.fillMaxWidth()
-            .clip(MaterialTheme.shapes.large)
+            .clip(MaterialTheme.shapes.small)
             .padding(MaterialTheme.spacing.large),
         horizontalArrangement = Arrangement.Center,
         verticalArrangement = Arrangement.Center,

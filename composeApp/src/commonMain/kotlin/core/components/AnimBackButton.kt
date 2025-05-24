@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.devscion.typistcmp.Typist
 import com.devscion.typistcmp.TypistSpeed
-import core.theme.AppColors
 import core.theme.fontSize
 import core.theme.interFamily
 import core.theme.spacing
@@ -56,7 +55,7 @@ fun AnimBackButton(onBackClicked: () -> Unit) {
     }
 
     NeonShadowBox(
-        color = AppColors.NEON2
+        backgroundColor = MaterialTheme.colorScheme.background
     ) {
         Row(
             Modifier

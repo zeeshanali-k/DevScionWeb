@@ -21,11 +21,10 @@ import devscionweb.composeapp.generated.resources.projects
 import home.domain.model.Project
 import org.jetbrains.compose.resources.stringResource
 
-
 @Composable
 fun ProjectsSection(
     onProjectClicked: (project: Project) -> Unit,
-    scrollRotation: Float,
+    xTranslation: Float,
     projects: List<Project>,
 ) {
     val density = LocalDensity.current
@@ -52,8 +51,7 @@ fun ProjectsSection(
                             300.dp
                         })
                         .graphicsLayer {
-                            this.rotationX = scrollRotation
-                            this.rotationZ = scrollRotation / 2
+                            this.rotationX = xTranslation
                         },
                     it
                 ) {

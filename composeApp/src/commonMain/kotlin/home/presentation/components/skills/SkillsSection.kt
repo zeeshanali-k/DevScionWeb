@@ -21,7 +21,7 @@ import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
-fun SkillsSection(modifier: Modifier = Modifier, skills: Skills) {
+fun SkillsSection(modifier: Modifier = Modifier, skills: Skills, xTranslation: Float) {
 
     Column(modifier) {
         Typist(
@@ -36,7 +36,7 @@ fun SkillsSection(modifier: Modifier = Modifier, skills: Skills) {
         )
 
         MaterialTheme.spacing.large.Vertical()
-        SkillsRow(skills = skills.languages)
+        SkillsRow(skills = skills.languages, xTranslation = xTranslation)
 
         MaterialTheme.spacing.large.Vertical()
 
@@ -51,7 +51,7 @@ fun SkillsSection(modifier: Modifier = Modifier, skills: Skills) {
             typistSpeed = TypistSpeed.FAST
         )
         MaterialTheme.spacing.large.Vertical()
-        SkillsRow(skills = skills.tech)
+        SkillsRow(skills = skills.tech, xTranslation = xTranslation)
         MaterialTheme.spacing.large.Vertical()
 
 
@@ -66,8 +66,7 @@ fun SkillsSection(modifier: Modifier = Modifier, skills: Skills) {
             typistSpeed = TypistSpeed.FAST
         )
         MaterialTheme.spacing.large.Vertical()
-        SkillsRow(skills = skills.other)
+        SkillsRow(skills = skills.other, xTranslation = xTranslation)
         MaterialTheme.spacing.large.Vertical()
-
     }
 }

@@ -34,7 +34,7 @@ fun DevScionWebTheme(
 
 
 val LocalWindowSize = compositionLocalOf {
-    WindowSize.COMPACT
+    WindowSize.EXPANDED
 }
 
 val MaterialTheme.window: WindowSize

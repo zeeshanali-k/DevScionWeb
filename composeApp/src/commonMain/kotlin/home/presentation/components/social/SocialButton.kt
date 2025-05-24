@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import core.components.NeonShadowBox
 import core.theme.AppColors
@@ -26,46 +25,37 @@ import core.theme.StandardBoldText
 import core.theme.spacing
 import core.utils.Horizontal
 import home.domain.model.Social
-import home.domain.model.SocialMedia
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun SocialButton(
+    modifier: Modifier = Modifier,
     social: Social,
-    maxWidth: Dp = 300.dp,
-    onClick: (id: SocialMedia) -> Unit,
+    maxWidth: Float = 300f,
+    onClick: () -> Unit,
 ) {
-    val isAnimating = remember {
-        mutableStateOf(false)
-    }
-    val isAnimated = remember {
-        mutableStateOf(false)
+    val itemWidthTarget = remember {
+        mutableStateOf(0f)
     }
     val btnWidth =
         animateDpAsState(
-            targetValue = if (isAnimating.value) maxWidth else 20.dp,
-            finishedListener = {
-                isAnimated.value = isAnimated.value.not()
-            },
+            targetValue = itemWidthTarget.value.dp,
             animationSpec = tween(
                 250, delayMillis = 10, easing = EaseOut
             ), label = ""
         )
 
-    LaunchedEffect(key1 = true) {
-        isAnimating.value = true
+    LaunchedEffect(Unit) {
+        itemWidthTarget.value = maxWidth
     }
 
-//    Box(Modifier.padding(1.dp)) {
     NeonShadowBox(
         color = AppColors.NEON2,
-        modifier = Modifier.width(
+        modifier = modifier.width(
             btnWidth.value
         ).clickable {
-            onClick(social.id)
+            onClick()
         }
     ) {
         Row(
@@ -78,7 +68,7 @@ fun SocialButton(
                 Modifier.size(20.dp)
             )
             MaterialTheme.spacing.mSmall.Horizontal()
-            AnimatedVisibility(visible = isAnimated.value) {
+            AnimatedVisibility(visible = btnWidth.value.value == maxWidth) {
                 StandardBoldText(
                     text = social.title,
                     maxLines = 1,
@@ -87,5 +77,4 @@ fun SocialButton(
             }
         }
     }
-//    }
 }

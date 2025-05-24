@@ -2,7 +2,10 @@ package home.presentation.components.projects
 
 import LocalAnimatedContentScope
 import LocalSharedTransitionScope
+import androidx.compose.animation.EnterExitState
 import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.animateDp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -36,21 +39,41 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun ProjectItem(modifier: Modifier = Modifier, project: Project, onItemClicked: () -> Unit) {
     val density = LocalDensity.current
+    val sharedTransitionScope = LocalSharedTransitionScope.current!!
+    val animatedVisibilityScope = LocalAnimatedContentScope.current!!
+    val cornerSize = animatedVisibilityScope.transition.animateDp { enterExit ->
+        when (enterExit) {
+            EnterExitState.PreEnter -> 0.dp
+            EnterExitState.Visible -> 6.dp
+            EnterExitState.PostExit -> 6.dp
+        }
+    }
+    val imageCornerSize = animatedVisibilityScope.transition.animateDp { enterExit ->
+        when (enterExit) {
+            EnterExitState.PreEnter -> 12.dp
+            EnterExitState.Visible -> 6.dp
+            EnterExitState.PostExit -> 6.dp
+        }
+    }
     NeonShadowBox(
         modifier = modifier
             .clickable {
                 onItemClicked()
             }
-            .padding(MaterialTheme.spacing.xSmall),
+            .padding(MaterialTheme.spacing.xSmall)
+            .then(with(sharedTransitionScope) {
+                Modifier.sharedBounds(
+                    rememberSharedContentState("bounds_${project.id}"),
+                    animatedVisibilityScope,
+                    resizeMode = SharedTransitionScope.ResizeMode.RemeasureToBounds,
+                    clipInOverlayDuringTransition = OverlayClip(
+                        clipShape = RoundedCornerShape(cornerSize.value)
+                    )
+                )
+            }),
         color = MaterialTheme.colorScheme.secondary
     ) {
         Column(
-            modifier = with(LocalSharedTransitionScope.current!!) {
-                Modifier.sharedBounds(
-                    rememberSharedContentState("image_bounds_${project.id}"),
-                    LocalAnimatedContentScope.current!!,
-                )
-            },
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -64,13 +87,19 @@ fun ProjectItem(modifier: Modifier = Modifier, project: Project, onItemClicked: 
                     .height(with(density) {
                         280.dp
                     })
-                    .then(with(LocalSharedTransitionScope.current!!) {
+                    .clip(RoundedCornerShape(topStart = 6.dp, topEnd = 6.dp))
+                    .then(with(sharedTransitionScope) {
                         Modifier.sharedElement(
                             rememberSharedContentState("image_${project.id}"),
-                            LocalAnimatedContentScope.current!!,
+                            animatedVisibilityScope,
+                            clipInOverlayDuringTransition = OverlayClip(
+                                clipShape = RoundedCornerShape(
+                                    topStart = imageCornerSize.value,
+                                    topEnd = imageCornerSize.value
+                                )
+                            )
                         )
-                    })
-                    .clip(RoundedCornerShape(topStart = 6.dp, topEnd = 6.dp)),
+                    }),
                 contentScale = ContentScale.FillBounds,
             )
             Column(
@@ -86,10 +115,10 @@ fun ProjectItem(modifier: Modifier = Modifier, project: Project, onItemClicked: 
                     maxLines = 1,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
-                        .then(with(LocalSharedTransitionScope.current!!) {
+                        .then(with(sharedTransitionScope) {
                             Modifier.sharedElement(
                                 rememberSharedContentState("title_${project.id}"),
-                                LocalAnimatedContentScope.current!!,
+                                animatedVisibilityScope,
                             )
                         })
                 )
@@ -99,10 +128,10 @@ fun ProjectItem(modifier: Modifier = Modifier, project: Project, onItemClicked: 
                     maxLines = 2,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
-                        .then(with(LocalSharedTransitionScope.current!!) {
+                        .then(with(sharedTransitionScope) {
                             Modifier.sharedElement(
                                 rememberSharedContentState("desc_${project.id}"),
-                                LocalAnimatedContentScope.current!!,
+                                animatedVisibilityScope,
                             )
                         })
                 )

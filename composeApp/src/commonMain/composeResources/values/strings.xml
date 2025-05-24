@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <string name="name">Zeeshan Ali</string>
     <string name="go_back">Go Back</string>
     <string name="projects">Projects</string>
     <string name="languages">Languages</string>
     <string name="technologies">Technologies</string>
     <string name="architecture">Architecture</string>
+    <string name="tech">Tech</string>
+    <string name="download_portfolio_app">Download Portfolio App</string>
 </resources>
